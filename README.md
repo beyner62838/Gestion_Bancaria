@@ -45,42 +45,55 @@ Before running the project, ensure you have installed:
 
 ### 1️⃣ Clone the repository
 
-
+```bash
 git clone https://github.com/beyner62838/PruebaTecnica1.git
 cd PruebaTecnica1
+```
 
- Create the Database
+### 2️⃣ Create the Database
 
 Create a PostgreSQL database named:
-bank_db
 
-3️⃣ Configure application.properties
+```
+prueba_tecnica
+```
 
-Located at:
-src/main/resources/application.properties
+### 3️⃣ Configure `application.properties`
 
+Located at:  
+`src/main/resources/application.properties`
+
+```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/prueba_tecnica
 spring.datasource.username=your_username
 spring.datasource.password=your_password
 
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
+```
 
-4️⃣ Run the project
+### 4️⃣ Run the project
+
+```bash
 mvn clean install
 mvn spring-boot:run
-
+```
 
 Server will run at:
 
+```
 http://localhost:8080
+```
 
-🗂️ Database Structure
+---
 
-Tables are automatically generated via JPA/Hibernate.
+## 🗂️ Database Structure
+
+> Tables are automatically generated via JPA/Hibernate.
 
 If you prefer manual creation:
 
+```sql
 CREATE TABLE clients (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100),
@@ -102,96 +115,137 @@ CREATE TABLE transactions (
     date TIMESTAMP,
     account_id INTEGER REFERENCES accounts(id)
 );
+```
 
-🚀 API Endpoints
-🧑‍💼 Clients
-➕ Create a client
+---
+
+## 🚀 API Endpoints
+
+### 🧑‍💼 **Clients**
+
+#### ➕ Create a client  
+```
 POST /clientes
+```
 
-
-Example body:
-
+**Example body:**
+```json
 {
   "name": "John",
   "lastname": "Doe",
   "email": "john.doe@gmail.com"
 }
+```
 
-📄 List all clients
+#### 📄 List all clients  
+```
 GET /clientes
+```
 
-🔍 Get client by ID
+#### 🔍 Get client by ID  
+```
 GET /clientes/{id}
+```
 
-✏️ Update client
+#### ✏️ Update client  
+```
 PUT /clientes/{id}
+```
 
-🗑️ Delete client
+#### 🗑️ Delete client  
+```
 DELETE /clientes/{id}
+```
 
-💳 Accounts
-➕ Create an account
+---
+
+### 💳 **Accounts**
+
+#### ➕ Create an account  
+```
 POST /cuentas
+```
 
-
-Example body:
-
+**Example body:**
+```json
 {
   "number": "123456789",
   "balance": 0,
   "clientId": 1
 }
+```
 
-📄 List all accounts
+#### 📄 List all accounts  
+```
 GET /cuentas
+```
 
-💸 Transactions
-➕ Register a transaction
+---
+
+### 💸 **Transactions**
+
+#### ➕ Register a transaction  
+```
 POST /transacciones
+```
 
-
-Example body:
-
+**Example body:**
+```json
 {
   "type": "DEPOSIT",
   "amount": 50000,
   "accountId": 1
 }
-
+```
 
 Transaction types allowed:
 
-DEPOSIT
+- `DEPOSIT`
+- `WITHDRAWAL`
 
-WITHDRAWAL
-
-📄 List all transactions
+#### 📄 List all transactions  
+```
 GET /transacciones
+```
 
-🧪 Example cURL Tests
-Deposit
-curl -X POST http://localhost:8080/transacciones \
--H "Content-Type: application/json" \
--d '{"type":"DEPOSIT","amount":20000,"accountId":1}'
+---
 
-Withdrawal
-curl -X POST http://localhost:8080/transacciones \
--H "Content-Type: application/json" \
--d '{"type":"WITHDRAWAL","amount":10000,"accountId":1}'
+## 🧪 Example cURL Tests
 
-🗺️ Project Status
+### Deposit
 
-✔ Functional CRUD operations
+```bash
+curl -X POST http://localhost:8080/transacciones -H "Content-Type: application/json" -d '{"type":"DEPOSIT","amount":20000,"accountId":1}'
+```
 
-✔ Basic validations
+### Withdrawal
 
-✔ Automatic database generation
+```bash
+curl -X POST http://localhost:8080/transacciones -H "Content-Type: application/json" -d '{"type":"WITHDRAWAL","amount":10000,"accountId":1}'
+```
+
+---
+
+## 🗺️ Project Status
+
+- ✔ Functional CRUD operations  
+- ✔ Basic validations  
+- ✔ Automatic database generation  
 
 
-Improve error handling responses
+---
 
-👨‍💻 Author
+## 📌 Roadmap / Future Improvements
 
-Breyner José Pertuz Castro
-GitHub: https://github.com/beyner62838
+- Add JWT authentication  
+- Add Swagger/OpenAPI documentation  
+- Implement pagination  
+- Add unit tests  
+- Improve error handling responses  
 
+---
+
+## 👨‍💻 Author
+
+**Breyner José Pertuz Castro**  
+GitHub: https://github.com/beyner62838  
